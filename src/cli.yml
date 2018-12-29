@@ -12,13 +12,13 @@ subcommands:
   - sage:
       about: Install and manage Sage
       subcommands:
-      - install:
-          about: Installs Sage
-          args:
-            - theme_name:
-                help: "theme name (optional; default: sage)"
-      - activate:
-          help: Activates Sage
-          args:
-            - theme_name:
-                help: "theme name (optional; default: sage)"
+        - install:
+            about: Installs Sage
+            args:
+              - theme_name:
+                  help: "theme name (optional; default: sage)"
+        - activate:
+            help: Activates Sage
+            args:
+              - theme_name:
+                  help: "theme name (optional; default: sage)"
