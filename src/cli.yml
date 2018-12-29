@@ -1,0 +1,24 @@
+name: roots
+version: "0.1.0"
+author: Roots Team <team@roots.io>
+about: A helper for building with Roots.
+subcommands:
+  - new:
+      about: Create a new Roots project (Trellis/Bedrock/Sage)
+      args:
+        - project:
+            help: project name, e.g. example.com
+            required: true
+  - sage:
+      about: Install and manage Sage
+      subcommands:
+      - install:
+          about: Installs Sage
+          args:
+            - theme_name:
+                help: "theme name (optional; default: sage)"
+      - activate:
+          help: Activates Sage
+          args:
+            - theme_name:
+                help: "theme name (optional; default: sage)"
