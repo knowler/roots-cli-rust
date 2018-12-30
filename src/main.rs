@@ -10,7 +10,7 @@ fn main() {
   let m = App::from_yaml(cli).get_matches();
 
   if let Some(m) = m.subcommand_matches("new") {
-    new_project(m.value_of("project").unwrap());
+    new_project(m.value_of("project").unwrap(), m.is_present("without_sage"));
   };
 
   if let Some(m) = m.subcommand_matches("sage") {
@@ -18,8 +18,8 @@ fn main() {
   };
 }
 
-fn new_project(name: &str) {
+fn new_project(name: &str, without_sage: bool) {
   println!("Creating new Roots project...");
-  let project = Trellis::new(name.to_string());
+  let project = Trellis::new(name.to_string(), without_sage);
   project.init();
 }

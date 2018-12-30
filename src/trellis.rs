@@ -11,10 +11,13 @@ pub struct Trellis {
 }
 
 impl Trellis {
-  pub fn new(name: String) -> Trellis {
+  pub fn new(name: String, without_sage: bool) -> Trellis {
     let site = Bedrock::new(
       name.to_string(),
-      Theme::IsSage(Sage::new(String::from("sage"), &name.to_string())),
+      match without_sage {
+        true => Theme::NotSage,
+        false => Theme::IsSage(Sage::new(String::from("sage"), &name.to_string())),
+      },
     );
 
     Trellis {
