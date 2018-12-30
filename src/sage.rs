@@ -1,4 +1,5 @@
 use git2::Repository;
+use std::fs::remove_dir_all;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
@@ -29,6 +30,9 @@ impl Sage {
   pub fn init(&self) {
     println!("Cloning Sage...");
     Repository::clone("https://github.com/roots/sage", &self.path).unwrap();
+
+    // Remove Sage's git repo
+    remove_dir_all(&self.path.join(".git")).unwrap();
 
     println!("Installing Composer dependencies...");
     Command::new("composer")
