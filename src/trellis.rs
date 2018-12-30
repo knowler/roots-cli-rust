@@ -2,7 +2,7 @@ use git2::Repository;
 use std::fs::{remove_dir_all, DirBuilder};
 use std::path::Path;
 
-use super::{Bedrock, Env};
+use super::{Bedrock, Env, Sage, Theme};
 
 pub struct Trellis {
   name: String,
@@ -12,7 +12,10 @@ pub struct Trellis {
 
 impl Trellis {
   pub fn new(name: String) -> Trellis {
-    let site = Bedrock::new(name.to_string());
+    let site = Bedrock::new(
+      name.to_string(),
+      Theme::IsSage(Sage::new(String::from("sage"), &name.to_string())),
+    );
 
     Trellis {
       name,
@@ -47,7 +50,7 @@ impl Trellis {
       Ok(repo) => repo,
       Err(e) => panic!("{}", e),
     };
-    println!("Initialized project git repository.")
+    println!("Initialized project git repository.");
   }
 
   fn install_trellis(&self) {
@@ -64,7 +67,7 @@ impl Trellis {
         Err(e) => panic!("{}", e),
       };
 
-      println!("Installed Trellis at ./{}/trellis", &self.name);
+      println!("Installed Trellis at ./{}/trellis", &path.to_str().unwrap());
     } else {
       println!("Trellis is already installed.");
     }
