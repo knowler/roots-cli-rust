@@ -1,5 +1,5 @@
 name: roots
-version: "0.2.1"
+version: "0.3.0"
 author: Roots Team <team@roots.io>
 about: A helper for building with Roots.
 subcommands:
