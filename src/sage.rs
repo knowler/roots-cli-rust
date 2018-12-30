@@ -6,6 +6,7 @@ use std::process::Command;
 pub struct Sage {
   name: String,
   path: PathBuf,
+  repo: String,
 }
 
 pub enum BuildEnv {
@@ -24,12 +25,16 @@ impl Sage {
       .join("site/web/app/themes")
       .join(&name);
 
-    Sage { name, path }
+    Sage {
+      name,
+      path,
+      repo: String::from("https://github.com/roots/sage"),
+    }
   }
 
   pub fn init(&self) {
     println!("Cloning Sage...");
-    Repository::clone("https://github.com/roots/sage", &self.path).unwrap();
+    Repository::clone(&self.repo, &self.path).unwrap();
 
     // Remove Sage's git repo
     remove_dir_all(&self.path.join(".git")).unwrap();

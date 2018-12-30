@@ -7,18 +7,26 @@ use super::Theme;
 pub struct Bedrock {
   pub name: String,
   theme: Theme,
+  repo: String,
 }
 
 impl Bedrock {
   pub fn new(name: String, theme: Theme) -> Bedrock {
-    Bedrock { name, theme }
+    Bedrock {
+      name,
+      theme,
+      repo: String::from("https://github.com/roots/bedrock"),
+    }
   }
 
-  pub fn init(&self) {
-    let path = Path::new(&self.name).join("site");
+  pub fn init(&self, alone: bool, project_name: &str) {
+    let path = match alone {
+      true => Path::new(&self.name).join("site"),
+      false => Path::new(project_name).join(&self.name),
+    };
 
     if !path.exists() {
-      Repository::clone("https://github.com/roots/bedrock", &path).unwrap();
+      Repository::clone(&self.repo, &path).unwrap();
       remove_dir_all(&path.join(".git")).unwrap();
       println!("Created site at ./{}", &path.to_str().unwrap());
 

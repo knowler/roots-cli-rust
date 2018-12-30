@@ -8,6 +8,7 @@ pub struct Trellis {
   name: String,
   sites: Vec<Bedrock>,
   environments: Vec<Env>,
+  repo: String,
 }
 
 impl Trellis {
@@ -30,6 +31,7 @@ impl Trellis {
         Env::new(String::from("development")),
         Env::new(String::from("staging")),
       ],
+      repo: String::from("https://github.com/roots/trellis"),
     }
   }
 
@@ -59,7 +61,7 @@ impl Trellis {
     let path = Path::new(&self.name).join("trellis");
 
     if !path.exists() {
-      Repository::clone("https://github.com/roots/trellis", &path).unwrap();
+      Repository::clone(&self.repo, &path).unwrap();
       remove_dir_all(&path.join(".git")).unwrap();
       println!("Installed Trellis at ./{}/trellis", &path.to_str().unwrap());
     } else {
@@ -71,7 +73,7 @@ impl Trellis {
     println!("Creating Bedrock sites...");
 
     for bedrock in &self.sites {
-      bedrock.init();
+      bedrock.init(self.sites.len() == 1usize, &self.name);
     }
   }
 }
