@@ -32,7 +32,10 @@ impl Trellis {
     let path = Path::new(&self.name);
 
     if !path.exists() {
-      DirBuilder::new().recursive(true).create(&self.name).unwrap();
+      DirBuilder::new()
+        .recursive(true)
+        .create(&self.name)
+        .unwrap();
       println!("Created project directory at ./{}", &self.name);
     }
 

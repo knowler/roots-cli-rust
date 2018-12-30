@@ -73,7 +73,10 @@ impl Sage {
     let node_modules_path = &self.path.join("node_modules").exists();
     if !node_modules_path {
       println!("Installing Node dependencies...");
-      Command::new("yarn").current_dir(&self.path).output().unwrap();
+      Command::new("yarn")
+        .current_dir(&self.path)
+        .output()
+        .unwrap();
     } else {
       println!("Node already installed.");
     }
