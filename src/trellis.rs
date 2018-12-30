@@ -16,7 +16,9 @@ impl Trellis {
       name.to_string(),
       match without_sage {
         true => Theme::NotSage,
-        false => Theme::IsSage(Sage::new(String::from("sage"), &name.to_string())),
+        false => {
+          Theme::IsSage(Sage::new(String::from("sage"), &name.to_string()))
+        }
       },
     );
 
