@@ -25,7 +25,7 @@ impl Bedrock {
       // If theme is set to Sage install Sage.
       match &self.theme {
         Theme::IsSage(theme) => theme.init(),
-        Theme::NotSage => panic!("Not Sage."),
+        Theme::NotSage => (),
       };
     } else {
       println!("Site {} already exists.", &self.name);

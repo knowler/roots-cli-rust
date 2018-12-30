@@ -9,6 +9,9 @@ subcommands:
         - project:
             help: project name, e.g. example.com
             required: true
+        - without_sage:
+            help: Do not install Sage
+            long: without-sage
   - sage:
       about: Install and manage Sage
       subcommands:
