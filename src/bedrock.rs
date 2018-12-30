@@ -18,16 +18,8 @@ impl Bedrock {
     let path = Path::new(&self.name).join("site");
 
     if !path.exists() {
-      match Repository::clone("https://github.com/roots/bedrock", &path) {
-        Ok(repo) => repo,
-        Err(e) => panic!("{}", e),
-      };
-
-      match remove_dir_all(&path.join(".git")) {
-        Ok(remove_git) => remove_git,
-        Err(e) => panic!("{}", e),
-      };
-
+      Repository::clone("https://github.com/roots/bedrock", &path).unwrap();
+      remove_dir_all(&path.join(".git")).unwrap();
       println!("Created site at ./{}", &path.to_str().unwrap());
 
       // If theme is set to Sage install Sage.

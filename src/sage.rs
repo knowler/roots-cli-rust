@@ -28,20 +28,14 @@ impl Sage {
 
   pub fn init(&self) {
     println!("Cloning Sage...");
-    match Repository::clone("https://github.com/roots/sage", &self.path) {
-      Ok(repo) => repo,
-      Err(e) => panic!("{}", e),
-    };
+    Repository::clone("https://github.com/roots/sage", &self.path).unwrap();
 
     println!("Installing Composer dependencies...");
-    match Command::new("composer")
+    Command::new("composer")
       .current_dir(&self.path)
       .arg("install")
       .output()
-    {
-      Ok(composer_install) => composer_install,
-      Err(e) => panic!("{}", e),
-    };
+      .unwrap();
 
     self.build(BuildEnv::Development);
 
@@ -54,25 +48,19 @@ impl Sage {
     match env {
       BuildEnv::Development => {
         println!("Building assets for development...");
-        match Command::new("yarn")
+        Command::new("yarn")
           .current_dir(&self.path)
           .arg("build")
           .output()
-        {
-          Ok(build_dev_assets) => build_dev_assets,
-          Err(e) => panic!("{}", e),
-        };
+          .unwrap();
       }
       BuildEnv::Production => {
         println!("Building assets for production...");
-        match Command::new("yarn")
+        Command::new("yarn")
           .current_dir(&self.path)
           .arg("build::production")
           .output()
-        {
-          Ok(build_prod_assets) => build_prod_assets,
-          Err(e) => panic!("{}", e),
-        };
+          .unwrap();
       }
     };
   }
@@ -85,10 +73,7 @@ impl Sage {
     let node_modules_path = &self.path.join("node_modules").exists();
     if !node_modules_path {
       println!("Installing Node dependencies...");
-      match Command::new("yarn").current_dir(&self.path).output() {
-        Ok(install_node_modules) => install_node_modules,
-        Err(e) => panic!("{}", e),
-      };
+      Command::new("yarn").current_dir(&self.path).output().unwrap();
     } else {
       println!("Node already installed.");
     }

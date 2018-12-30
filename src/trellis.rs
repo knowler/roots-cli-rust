@@ -32,10 +32,7 @@ impl Trellis {
     let path = Path::new(&self.name);
 
     if !path.exists() {
-      DirBuilder::new()
-        .recursive(true)
-        .create(&self.name)
-        .unwrap();
+      DirBuilder::new().recursive(true).create(&self.name).unwrap();
       println!("Created project directory at ./{}", &self.name);
     }
 
@@ -46,10 +43,7 @@ impl Trellis {
     self.create_sites();
 
     // Initialize git repository
-    match Repository::init(&self.name) {
-      Ok(repo) => repo,
-      Err(e) => panic!("{}", e),
-    };
+    Repository::init(&self.name).unwrap();
     println!("Initialized project git repository.");
   }
 
@@ -57,16 +51,8 @@ impl Trellis {
     let path = Path::new(&self.name).join("trellis");
 
     if !path.exists() {
-      match Repository::clone("https://github.com/roots/trellis", &path) {
-        Ok(repo) => repo,
-        Err(e) => panic!("{}", e),
-      };
-
-      match remove_dir_all(&path.join(".git")) {
-        Ok(remove_git) => remove_git,
-        Err(e) => panic!("{}", e),
-      };
-
+      Repository::clone("https://github.com/roots/trellis", &path).unwrap();
+      remove_dir_all(&path.join(".git")).unwrap();
       println!("Installed Trellis at ./{}/trellis", &path.to_str().unwrap());
     } else {
       println!("Trellis is already installed.");
