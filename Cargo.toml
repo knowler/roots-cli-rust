@@ -1,5 +1,5 @@
 [package]
-name = "roots"
+name = "roots-cli"
 version = "0.3.0"
 authors = ["Nathan Knowler <nathan@knowler.me>"]
 edition = "2018"

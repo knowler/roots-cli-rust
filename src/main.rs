@@ -2,8 +2,8 @@
 extern crate clap;
 use clap::App;
 
-extern crate roots;
-use roots::Trellis;
+extern crate roots_cli;
+use roots_cli::Trellis;
 
 fn main() {
   let cli = load_yaml!("cli.yml");

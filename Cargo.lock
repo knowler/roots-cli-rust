@@ -185,7 +185,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "roots"
+name = "roots-cli"
 version = "0.3.0"
 dependencies = [
  "clap 2.32.0 (registry+https://github.com/rust-lang/crates.io-index)",
