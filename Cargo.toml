@@ -6,7 +6,7 @@ edition = "2018"
 
 [dependencies]
 git2 = "0.8.0"
-clap = { version = "2.32.0", features = ["yaml"] }
+clap = { version = "2.33.0", features = ["yaml"] }
 yaml-rust = { version = "0.4.2", optional = true }
 
 [features]
